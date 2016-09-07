@@ -6,7 +6,7 @@ input:
     SPM_TOKEN: abda900a-XXXX-XXXX-XXXX-c463397f162b
 */
 function ServerMonitor (config, eventEmitter) {
-  this.config = config.configFile.input.serverMonitor
+  this.config = config.configFile.input.logagentMonitor
 }
 
 ServerMonitor.prototype = {

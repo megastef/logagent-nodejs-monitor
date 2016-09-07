@@ -17,7 +17,7 @@ Then add follwoing lines to your logagent 2.x config file:
 
 ```
 input:
-  serverMonitor:
+  logagentMonitor:
     module: logagent-nodejs-monitor
     SPM_TOKEN: YOUR_SPM_FOR_NODEJS_APP_TOKEN
 
