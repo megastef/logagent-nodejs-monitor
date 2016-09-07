@@ -1,0 +1,22 @@
+{
+  "name": "logagent-nodejs-monitor",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/megastef/logagent-nodejs-monitor.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/megastef/logagent-nodejs-monitor/issues"
+  },
+  "homepage": "https://github.com/megastef/logagent-nodejs-monitor#readme",
+  "dependencies": {
+    "spm-agent-nodejs": "^1.30.1"
+  }
+}
