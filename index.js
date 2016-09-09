@@ -11,10 +11,18 @@ function ServerMonitor (config, eventEmitter) {
 
 ServerMonitor.prototype = {
   start: function () {
+    if (this.config && this.config.SPM_LOG_TO_CONSOLE !== undefined) {
+      process.env.SPM_LOG_TO_CONSOLE = this.config.SPM_LOG_TO_CONSOLE
+    }
+    if (this.config && this.config.SPM_LOG_LEVEL !== undefined) {
+      process.env.SPM_LOG_LEVEL = this.config.SPM_LOG_LEVEL
+    }
     if (this.config && this.config.SPM_TOKEN) {
       process.env.SPM_TOKEN = this.config.SPM_TOKEN
-      process.env.SPM_LOG_TO_CONSOLE = 'true'
-      this.spmAgent = require('spm-agent-nodejs')
+      try {
+        this.spmAgent = require('spm-agent-nodejs')
+        this.spmAgent.on('error', console.log)
+      } catch (err) {}
     }
   },
   stop: function (cb) {
