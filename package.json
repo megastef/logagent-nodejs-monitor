@@ -1,7 +1,7 @@
 {
-  "name": "logagent-nodejs-monitor",
+  "name": "@sematext/logagent-nodejs-monitor",
   "version": "1.0.0",
-  "description": "",
+  "description": "Monitoring plgin for logagent",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
