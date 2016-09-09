@@ -16,7 +16,7 @@ Then add follwoing lines to your logagent 2.x config file:
 ```
 input:
   logagentMonitor:
-    module: logagent-nodejs-monitor
+    module: @sematext/logagent-nodejs-monitor
     SPM_TOKEN: YOUR_SPM_FOR_NODEJS_APP_TOKEN
     SPM_LOG_TO_COSOLE: false
     SPM_LOG_LEVEL: error
