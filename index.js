@@ -5,6 +5,35 @@ input:
     module: logagent-nodejs-monitor
     SPM_TOKEN: abda900a-XXXX-XXXX-XXXX-c463397f162b
 */
+// kill -USR2 generates a heapdump file in the working directory (/tmp)
+var fs = require('fs')
+
+var profileCounter = 0
+
+function cpuProfiler (duration) {
+  console.log('start profiling, reason SIGUSR1')
+  var profiler = require('v8-profiler')
+  var snapshot1 = profiler.takeSnapshot()
+  var name = profileCounter++ + '-' + new Date().toISOString()
+  snapshot1.export(function (error, result) {
+    if (!error) {
+      fs.writeFileSync('snapshot-' + name + '.heapsnapshot', result)
+    }
+    snapshot1.delete()
+    profiler.startProfiling(name, true)
+    setTimeout(function () {
+      var profile = profiler.stopProfiling('')
+      profile.export(function (error, result) {
+        if (!error) {
+          fs.writeFileSync('cpu-profile-' + name + '.cpuprofile', result)
+        }
+        profile.delete()
+      })
+    }, duration || 10000)
+  })
+}
+process.on('SIGUSR2', cpuProfiler)
+
 function ServerMonitor (config, eventEmitter) {
   this.config = config.configFile.input.logagentMonitor
 }
