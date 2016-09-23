@@ -1,4 +1,5 @@
 var LogagentMonitor = require('./index.js')
+console.log('pid: ' + process.pid)
 // simulate LA monitor loading, usually done in @sematext/logagent
 function testMonitor () {
   var EE = require('events').EventEmitter
