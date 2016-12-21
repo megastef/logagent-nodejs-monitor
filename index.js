@@ -11,6 +11,7 @@ var fs = require('fs')
 var profileCounter = 0
 
 function cpuProfiler (duration) {
+  /* cpu profiler does not compile on Node 7.3.0
   console.log('start profiling, reason SIGUSR1')
   var profiler = require('v8-profiler')
   var snapshot1 = profiler.takeSnapshot()
@@ -31,6 +32,7 @@ function cpuProfiler (duration) {
       })
     }, duration || 10000)
   })
+  */
 }
 process.on('SIGUSR2', cpuProfiler)
 
