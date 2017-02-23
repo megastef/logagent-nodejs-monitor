@@ -11,29 +11,34 @@ var fs = require('fs')
 var profileCounter = 0
 
 function cpuProfiler (duration) {
-  /* cpu profiler does not compile on Node 7.3.0
-  console.log('start profiling, reason SIGUSR1')
-  var profiler = require('v8-profiler')
+  // v8-profiler does not compile on Node 7.3.0
+  console.log('start profiling, reason SIGUSR2')
+  var profiler = require('@risingstack/v8-profiler')
   var snapshot1 = profiler.takeSnapshot()
   var name = profileCounter++ + '-' + new Date().toISOString()
   snapshot1.export(function (error, result) {
     if (!error) {
-      fs.writeFileSync('snapshot-' + name + '.heapsnapshot', result)
+      var heapdumpFileName = 'snapshot-' + name + '.heapsnapshot'
+      fs.writeFileSync(heapdumpFileName, result)
+      console.log('saved heapdump ' + heapdumpFileName)
     }
     snapshot1.delete()
     profiler.startProfiling(name, true)
+    console.log('start CPU profiler ... pls. wait ' + (duration || 30000) + ' ms')
     setTimeout(function () {
       var profile = profiler.stopProfiling('')
       profile.export(function (error, result) {
         if (!error) {
-          fs.writeFileSync('cpu-profile-' + name + '.cpuprofile', result)
+          var cpuFileName = 'cpu-profile-' + name + '.cpuprofile'
+          fs.writeFileSync(cpuFileName, result)
+          console.log('saved CPU profile ' + cpuFileName)
         }
         profile.delete()
       })
-    }, duration || 10000)
+    }, duration || 30000)
   })
-  */
 }
+
 process.on('SIGUSR2', cpuProfiler)
 
 function ServerMonitor (config, eventEmitter) {
@@ -52,8 +57,10 @@ ServerMonitor.prototype = {
       process.env.SPM_TOKEN = this.config.SPM_TOKEN
       try {
         this.spmAgent = require('spm-agent-nodejs')
-        this.spmAgent.on('error', console.log)
-      } catch (err) {}
+        this.spmAgent.on('error', console.error)
+      } catch (err) {
+        console.error(err)
+      }
     }
   },
   stop: function (cb) {
