@@ -1,6 +1,6 @@
 {
   "name": "@sematext/logagent-nodejs-monitor",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "description": "Monitoring plugin for logagent",
   "main": "index.js",
   "scripts": {
