@@ -38,8 +38,14 @@ function cpuProfiler (duration) {
     }, duration || 30000)
   })
 }
-
-process.on('SIGUSR2', cpuProfiler)
+function startProfiler() {
+  try {
+    cpuProfiler()
+  } catch  (err) {
+    console.error(err)
+  }
+}
+process.on('SIGUSR2',startProfiler)
 
 function ServerMonitor (config, eventEmitter) {
   this.config = config.configFile.input.logagentMonitor
