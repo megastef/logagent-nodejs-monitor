@@ -11,8 +11,8 @@ var fs = require('fs')
 var profileCounter = 0
 
 function cpuProfiler (duration) {
-  // v8-profiler does not compile on Node 7.3.0
   console.log('start profiling, reason SIGUSR2')
+  // v8-profiler does not compile on Node 7.x -> move to @risingstack/v8-profiler
   var profiler = require('@risingstack/v8-profiler')
   var snapshot1 = profiler.takeSnapshot()
   var name = profileCounter++ + '-' + new Date().toISOString()
