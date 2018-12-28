@@ -25,6 +25,7 @@ input:
 
 Restart logagent-js service. 
 
+# Documentation
 
-
-
+- [Logagent Documentation](https://sematext.com/docs/logagent/)
+- [Node.js monitoring](https://sematext.com/docs/integration/node.js/)
