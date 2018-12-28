@@ -48,7 +48,7 @@ function startProfiler() {
 process.on('SIGUSR2',startProfiler)
 
 function ServerMonitor (config, eventEmitter) {
-  this.config = config.configFile.input.logagentMonitor
+  this.config = config
 }
 
 ServerMonitor.prototype = {
