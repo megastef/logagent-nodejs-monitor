@@ -19,6 +19,7 @@ function testMonitor () {
   // create and start the plugin - normally done by logagent ...
   var plugin = new LogagentMonitor(config, new EE())
   plugin.start()
+  plugin.startProfiler()
   // simulate a client
   setInterval(function () {}, 1000)
 }

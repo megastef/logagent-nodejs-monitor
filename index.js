@@ -12,8 +12,8 @@ var profileCounter = 0
 
 function cpuProfiler (duration) {
   console.log('start profiling, reason SIGUSR2')
-  // v8-profiler does not compile on Node 7.x -> move to @risingstack/v8-profiler
-  var profiler = require('andrasq-v8-profiler')
+  // @risingstack/v8-profiler does not compile on Node 8.x -> move to v8-profiler-next
+  var profiler = require('v8-profiler-next')
   var snapshot1 = profiler.takeSnapshot()
   var name = profileCounter++ + '-' + new Date().toISOString()
   snapshot1.export(function (error, result) {
@@ -76,7 +76,8 @@ ServerMonitor.prototype = {
       this.spmAgent.stop()
       cb()
     }
-  }
+  },
+  startProfiler: startProfiler
 }
 
 module.exports = ServerMonitor
