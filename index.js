@@ -13,7 +13,7 @@ var profileCounter = 0
 function cpuProfiler (duration) {
   console.log('start profiling, reason SIGUSR2')
   // v8-profiler does not compile on Node 7.x -> move to @risingstack/v8-profiler
-  var profiler = require('@risingstack/v8-profiler')
+  var profiler = require('andrasq-v8-profiler')
   var snapshot1 = profiler.takeSnapshot()
   var name = profileCounter++ + '-' + new Date().toISOString()
   snapshot1.export(function (error, result) {
@@ -38,14 +38,16 @@ function cpuProfiler (duration) {
     }, duration || 30000)
   })
 }
-function startProfiler() {
+
+function startProfiler () {
   try {
     cpuProfiler()
-  } catch  (err) {
+  } catch (err) {
     console.error(err)
   }
 }
-process.on('SIGUSR2',startProfiler)
+
+process.on('SIGUSR2', startProfiler)
 
 function ServerMonitor (config, eventEmitter) {
   this.config = config
