@@ -8,7 +8,7 @@ Make sure @sematext/logagent (> v2.0) is installed.
 
 ```
 npm i -g @sematext/logagent 
-npm i -g @semtext/logagent-nodejs-monitor 
+npm i -g @sematext/logagent-nodejs-monitor 
 ```
 
 Then add follwoing lines to your logagent 2.x config file: 
