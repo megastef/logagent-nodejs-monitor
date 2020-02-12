@@ -7,7 +7,7 @@ input:
 */
 // kill -USR2 generates a heapdump file in the working directory (/tmp)
 var fs = require('fs')
-
+var SpmAgent = require('spm-agent')
 var profileCounter = 0
 
 function cpuProfiler (duration) {
@@ -51,6 +51,7 @@ process.on('SIGUSR2', startProfiler)
 
 function ServerMonitor (config, eventEmitter) {
   this.config = config
+  this.eventEmitter = eventEmitter
 }
 
 ServerMonitor.prototype = {
@@ -79,6 +80,29 @@ ServerMonitor.prototype = {
       try {
         this.spmAgent = require('spm-agent-nodejs')
         this.spmAgent.on('error', console.error)
+        var eventEmitter = this.eventEmitter
+        var config = this.config
+        var logagentStatsAgent = new SpmAgent.Agent({
+          start: function (agent) {
+            eventEmitter.on('logagent-stats', (stats) => {
+              var metrics = {
+                measurement: 'logagent',
+                tags: { token: process.env.MONITORING_TOKEN || process.env.SPM_TOKEN },
+                fields: stats
+              }
+              if (config.debug === true) {
+                console.log(metrics)
+              }
+              agent.addMetrics(metrics)
+            })
+          },
+          stop: function (cb) {
+            if (cb) {
+              cb()
+            }
+          }
+        })
+        this.spmAgent.createAgent(logagentStatsAgent)
       } catch (err) {
         console.error(err)
       }

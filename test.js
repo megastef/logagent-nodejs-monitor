@@ -6,22 +6,21 @@ function testMonitor () {
   // Logagent loads the configfrom a yaml file
   // we simply pass a JSON object
   var config = {
-    configFile: {
-      input: {
-        logagentMonitor: {
-          SPM_TOKEN: 'TEST',
-          SPM_LOG_TO_CONSOLE: 'false',
-          SPM_LOG_LEVEL: 'error'
-        }
-      }
-    }
+    debug: true,
+    SPM_TOKEN: 'TEST',
+    SPM_LOG_TO_CONSOLE: 'true',
+    SPM_LOG_LEVEL: 'debug'
   }
   // create and start the plugin - normally done by logagent ...
-  var plugin = new LogagentMonitor(config, new EE())
+  var ee = new EE()
+  var plugin = new LogagentMonitor(config, ee)
   plugin.start()
   plugin.startProfiler()
+
   // simulate a client
-  setInterval(function () {}, 1000)
+  setInterval(function () {
+    ee.emit('logagent-stats', { count: 1 })
+  }, 1000)
 }
 
 if (require.main === module) {

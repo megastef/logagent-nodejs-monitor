@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/megastef/logagent-nodejs-monitor#readme",
   "dependencies": {
+    "spm-agent": "^2.0.8",
     "spm-agent-nodejs": "^3.0.1",
     "v8-profiler-next": "^1.2.1"
   },
