@@ -11,7 +11,7 @@ npm i -g @sematext/logagent
 npm i -g @sematext/logagent-nodejs-monitor 
 ```
 
-Then add follwoing lines to your logagent 2.x config file: 
+Then add following lines to your logagent 2.x config file: 
 
 ```
 input:
@@ -19,7 +19,7 @@ input:
     module: @sematext/logagent-nodejs-monitor
     INFRA_TOKEN: YOUR_SEMATEXT_INFRA_MONITORING_TOKEN
     MONITORING_TOKEN: YOUR_NODEJS_APP_TOKEN
-    SPM_LOG_TO_COSOLE: false
+    SPM_LOG_TO_CONSOLE: false
     SPM_LOG_LEVEL: error
 
 ````
