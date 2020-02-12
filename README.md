@@ -17,7 +17,8 @@ Then add follwoing lines to your logagent 2.x config file:
 input:
   logagentMonitor:
     module: @sematext/logagent-nodejs-monitor
-    SPM_TOKEN: YOUR_SPM_FOR_NODEJS_APP_TOKEN
+    INFRA_TOKEN: YOUR_SEMATEXT_INFRA_MONITORING_TOKEN
+    MONITORING_TOKEN: YOUR_NODEJS_APP_TOKEN
     SPM_LOG_TO_COSOLE: false
     SPM_LOG_LEVEL: error
 
