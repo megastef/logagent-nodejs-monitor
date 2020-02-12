@@ -64,9 +64,15 @@ ServerMonitor.prototype = {
     if (this.config && this.config.INFRA_TOKEN !== undefined) {
       process.env.INFRA_TOKEN = this.config.INFRA_TOKEN
     }
+    if (process.env.MONITORING_TOKEN) {
+      if (!this.config.MONITORING_TOKEN) {
+        this.config.MONITORING_TOKEN = process.env.MONITORING_TOKEN
+      }
+    }
     if (this.config && this.config.MONITORING_TOKEN) {
       this.config.SPM_TOKEN = this.config.MONITORING_TOKEN
     }
+
     if (this.config && this.config.SPM_TOKEN) {
       process.env.SPM_TOKEN = this.config.SPM_TOKEN
       process.env.MONITORING_TOKEN = this.config.SPM_TOKEN
