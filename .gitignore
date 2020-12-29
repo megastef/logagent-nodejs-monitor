@@ -33,3 +33,13 @@ spmlogs
 spmdb
 .spmagentrc
 
+# npm config
+.npmrc
+.npmignore
+
+# Prettier Standard
+.editorconfig
+
+# cpu profile tests and snapshots
+cpu*
+snapshot*

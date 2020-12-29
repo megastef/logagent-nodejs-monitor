@@ -24,7 +24,9 @@ function cpuProfiler (duration) {
     }
     snapshot1.delete()
     profiler.startProfiling(name, true)
-    console.log('start CPU profiler ... pls. wait ' + (duration || 30000) + ' ms')
+    console.log(
+      'start CPU profiler ... pls. wait ' + (duration || 30000) + ' ms'
+    )
     setTimeout(function () {
       var profile = profiler.stopProfiling('')
       profile.export(function (error, result) {
@@ -84,10 +86,12 @@ ServerMonitor.prototype = {
         var config = this.config
         var logagentStatsAgent = new SpmAgent.Agent({
           start: function (agent) {
-            eventEmitter.on('logagent-stats', (stats) => {
+            eventEmitter.on('logagent-stats', stats => {
               var metrics = {
                 measurement: 'logagent',
-                tags: { token: process.env.MONITORING_TOKEN || process.env.SPM_TOKEN },
+                tags: {
+                  token: process.env.MONITORING_TOKEN || process.env.SPM_TOKEN
+                },
                 fields: stats
               }
               if (config.debug === true) {

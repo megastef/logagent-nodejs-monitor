@@ -4,7 +4,11 @@
   "description": "Monitoring plugin for logagent",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "node test.js",
+    "standard": "standard lib/**/**/*.js bin/*.js",
+    "format": "prettier-standard --format",
+    "lint": "prettier-standard --lint '**/*.js'",
+    "format-lint": "prettier-standard --format --lint '**/*.js'"
   },
   "repository": {
     "type": "git",
@@ -23,5 +27,25 @@
   },
   "optionalDependencies": {
     "v8-profiler-next": "^1.2.1"
+  },
+  "devDependencies": {
+    "auto-changelog": "^1.16.4",
+    "babel-eslint": "^10.1.0",
+    "prettier-standard": "^16.3.0",
+    "release-it": "^13.6.6",
+    "standard": "^14.3.4"
+  },
+  "release-it": {
+    "github": {
+      "release": true,
+      "tokenRef": "RELEASE_IT_GITHUB_TOKEN",
+      "releaseNotes": "npx auto-changelog --stdout --commit-limit false -u --template ./changelog.hbs"
+    },
+    "hooks": {
+      "after:bump": "npx auto-changelog -p"
+    }
+  },
+  "standard": {
+    "parser": "babel-eslint"
   }
 }
