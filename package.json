@@ -8,7 +8,9 @@
     "standard": "standard lib/**/**/*.js bin/*.js",
     "format": "prettier-standard --format",
     "lint": "prettier-standard --lint '**/*.js'",
-    "format-lint": "prettier-standard --format --lint '**/*.js'"
+    "format-lint": "prettier-standard --format --lint '**/*.js'",
+    "auto-changelog": "auto-changelog",
+    "release": "release-it"
   },
   "repository": {
     "type": "git",
